@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Market Vision</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo/logo.png" class="brand-mark" alt="Logo">
+      <span>Market Vision</span>
+    </a>
+    
+    <div class="nav-actions">
+      <!-- Cart Outside -->
+      <a href="#" class="cart-icon" id="cartIcon" title="View Cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge">0</span>
+      </a>
+      
+      <!-- Hamburger Toggle -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <nav id="mobileMenu" class="mobile-menu">
+      <div id="menuProfileContainer">
+         <!-- JS will inject PFP and Name here -->
+      </div>
+      <div class="menu-divider"></div>
+      <a href="index.html"><i class="fas fa-home" style="margin-right:8px;"></i> Home</a>
+      <a href="products.html"><i class="fas fa-box" style="margin-right:8px;"></i> Products</a>
+      <div class="menu-divider"></div>
+      <div id="authMenuLinks" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+         <a href="login.html"><i class="fas fa-sign-in-alt" style="margin-right:8px;"></i> Login / Sign Up</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="dashboard">
+    <div class="container">
+      <div class="dash-head">
+        <div>
+          <span class="eyebrow">ADMIN</span>
+          <h1>Product Dashboard</h1>
+          <p class="muted">Your products are securely stored in Firebase.</p>
+        </div>
+        <button class="btn primary" id="addBtn">+ Add Product</button>
+      </div>
+
+      <div class="stats">
+        <div>
+          <strong id="count">0</strong>
+          <span>Products</span>
+        </div>
+        <div>
+          <strong id="catCount">0</strong>
+          <span>Categories</span>
+        </div>
+      </div>
+
+      <!-- Site Settings Panel -->
+      <div class="panel" style="margin-bottom: 25px;">
+        <div class="panel-head">
+          <h2>Site Settings</h2>
+        </div>
+        <form id="settingsForm" style="display: grid; gap: 15px; grid-template-columns: 1fr 1fr;">
+          <label>
+            Contact Phone Number
+            <input id="sitePhone" type="text" placeholder="917804888497">
+          </label>
+          <label>
+            Instagram Handle
+            <input id="siteInsta" type="text" placeholder="@kumre_krishna_11">
+          </label>
+          <div style="grid-column: 1 / -1;">
+            <button class="btn primary" type="submit">Update Settings</button>
+            <span id="settingsStatus" class="muted" style="margin-left:10px;"></span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Products Panel -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Products</h2>
+          <input id="dashSearch" placeholder="Search...">
+        </div>
+        <div id="list" class="admin-list"></div>
+      </div>
+      
+    </div>
+  </main>
+  
+  <div id="modal"></div>
+
+  <footer class="footer" style="background: #fff; margin-top: auto;">
+    <div class="container footer-row">
+      <span>&copy; <span id="year"></span> Market Vision. All Rights Reserved.</span>
+      <span>Admin Portal</span>
+    </div>
+  </footer>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

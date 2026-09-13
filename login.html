@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Sign Up | Market Vision</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+  <div class="auth-box">
+    <a class="brand centered" href="index.html">
+      <img src="assets/logo/logo.png" class="brand-mark" alt="Logo">
+      <span>Market Vision</span>
+    </a>
+    <h1 id="authTitle">Login</h1>
+    <p class="muted" id="authSubtitle">Welcome back! Sign in to your account.</p>
+    
+    <!-- Google Login Button -->
+    <button type="button" class="btn secondary full" id="googleLoginBtn" style="margin-bottom: 15px;">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width:18px; margin-right:8px;">
+      Continue with Google
+    </button>
+    <div class="divider">or</div>
+
+    <!-- Main Auth Form -->
+    <form id="loginForm">
+      <label id="nameLabel" style="display: none;">
+        Full Name <small>(Optional)</small>
+        <input id="name" type="text" autocomplete="name">
+      </label>
+      <label id="phoneLabel" style="display: none;">
+        Phone Number <small>(Optional)</small>
+        <input id="phone" type="tel" autocomplete="tel">
+      </label>
+      <label>
+        Email
+        <input id="email" type="email" required autocomplete="email">
+      </label>
+      <label>
+        Password
+        <input id="password" type="password" required autocomplete="current-password">
+      </label>
+      <label id="confirmPasswordLabel" style="display: none;">
+        Confirm Password
+        <input id="confirmPassword" type="password" autocomplete="new-password">
+      </label>
+      
+      <div id="loginError" class="form-error"></div>
+      <button class="btn primary full" type="submit" id="authSubmitBtn">Login</button>
+    </form>
+    
+    <div class="tiny" style="margin-top: 15px;">
+      <span id="toggleText">Don't have an account?</span> 
+      <a href="#" id="toggleAuth" style="color: #1565c0; font-weight: bold;">Sign Up</a>
+    </div>
+    <a class="back-link" href="index.html">← Back to website</a>
+  </div>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Vision | Home</title>
+  <meta name="description" content="Market Vision - quality products and services at great value.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo/logo.png" class="brand-mark" alt="Logo">
+      <span>Market Vision</span>
+    </a>
+    
+    <div class="nav-actions">
+      <!-- Cart Outside -->
+      <a href="#" class="cart-icon" id="cartIcon" title="View Cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge">0</span>
+      </a>
+      
+      <!-- Hamburger Toggle -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <!-- Dropdown Menu -->
+    <nav id="mobileMenu" class="mobile-menu">
+      <div id="menuProfileContainer"></div>
+      <div class="menu-divider"></div>
+      <a href="index.html"><i class="fas fa-home" style="margin-right:8px;"></i> Home</a>
+      <a href="products.html"><i class="fas fa-box" style="margin-right:8px;"></i> Products</a>
+      <div class="menu-divider"></div>
+      <div id="authMenuLinks" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+         <a href="login.html"><i class="fas fa-sign-in-alt" style="margin-right:8px;"></i> Login / Sign Up</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-bg-elements">
+    <div class="floating-icon icon-1"><i class="fas fa-shopping-bag"></i></div>
+    <div class="floating-icon icon-2"><i class="fas fa-box"></i></div>
+    <div class="floating-icon icon-3"><i class="fas fa-cart-shopping"></i></div>
+    <div class="hero-circle circle-1"></div>
+    <div class="hero-circle circle-2"></div>
+  </div>
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="eyebrow">WELCOME TO MARKET VISION</span>
+      <h1>Quality products.<br><span>Simple shopping.</span></h1>
+      <p>Discover useful products, trusted quality and friendly service all in one place.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="products.html">View Products</a>
+        <a class="btn secondary" href="#contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="hero-character">
+      <img src="assets/images/shopping-character.svg" alt="Shopping illustration">
+    </div>
+  </div>
+</section>
+
+<!-- HARDCODED CATEGORIES -->
+<section class="categories-section" id="categories">
+  <div class="section-header">
+    <h2>Shop by Category</h2>
+    <a href="products.html" class="see-all">See All <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="categories-grid">
+    <a href="products.html?cat=Clothes" class="category-card"><div class="category-icon clothes"><i class="fas fa-tshirt"></i></div><span>Clothes</span></a>
+    <a href="products.html?cat=Stationery" class="category-card"><div class="category-icon clothes"><i class="fas fa-book"></i></div><span>Stationery</span></a>
+    <a href="products.html?cat=Phones" class="category-card"><div class="category-icon phones"><i class="fas fa-mobile-alt"></i></div><span>Phones</span></a>
+    <a href="products.html?cat=Electronics" class="category-card"><div class="category-icon electronics"><i class="fas fa-laptop"></i></div><span>Electronics</span></a>
+    <a href="products.html?cat=Beauty" class="category-card"><div class="category-icon beauty"><i class="fas fa-spa"></i></div><span>Beauty</span></a>
+    <a href="products.html?cat=Accessories" class="category-card"><div class="category-icon accessories"><i class="fas fa-glasses"></i></div><span>Accessories</span></a>
+    <a href="products.html?cat=Groceries" class="category-card"><div class="category-icon groceries"><i class="fas fa-shopping-basket"></i></div><span>Groceries</span></a>
+    <a href="products.html" class="category-card"><div class="category-icon more"><i class="fas fa-ellipsis-h"></i></div><span>More</span></a>
+  </div>
+</section>
+
+<section class="section" id="featured">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">OUR COLLECTION</span><h2>Featured Products</h2></div>
+      <a href="products.html">View all</a>
+    </div>
+    <div class="product-grid" id="featuredProducts"></div>
+  </div>
+</section>
+
+<section class="section light" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">ABOUT US</span>
+        <h2>Built around quality and trust.</h2>
+      </div>
+      <p>Market Vision is a simple, customer-focused marketplace. We aim to provide useful products with clear information, fair pricing and dependable service.</p>
+    </div>
+    <div class="trust-features">
+      <div class="trust-item"><div class="trust-icon delivery"><i class="fas fa-truck"></i></div><div><h3>Fast Delivery</h3><p>Across India</p></div></div>
+      <div class="trust-item"><div class="trust-icon secure"><i class="fas fa-shield-alt"></i></div><div><h3>Secure Payments</h3><p>100% Safe & Secure</p></div></div>
+      <div class="trust-item"><div class="trust-icon support"><i class="fas fa-headset"></i></div><div><h3>Call Support</h3><p>We're here to help</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container contact-card">
+    <div><span class="eyebrow">GET IN TOUCH</span><h2>Have a question?</h2><p>Contact us for product details, availability or orders.</p></div>
+    <div class="contact-actions">
+      <a class="btn primary" id="whatsappLink" target="_blank">WhatsApp</a>
+      <a class="btn secondary" id="callLink">Call Us</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-row">
+    <span>© <span id="year"></span> Market Vision. All Rights Reserved.</span>
+    <span>Designed with care.</span>
+  </div>
+</footer>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

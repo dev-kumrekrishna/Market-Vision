@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | Market Vision</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo/logo.png" class="brand-mark" alt="Logo">
+      <span>Market Vision</span>
+    </a>
+    
+    <div class="nav-actions">
+      <!-- Cart Outside -->
+      <a href="#" class="cart-icon" id="cartIcon" title="View Cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge">0</span>
+      </a>
+      
+      <!-- Hamburger Toggle -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Dropdown Menu -->
+    <nav id="mobileMenu" class="mobile-menu">
+      <div id="menuProfileContainer"></div>
+      <div class="menu-divider"></div>
+      <a href="index.html"><i class="fas fa-home" style="margin-right:8px;"></i> Home</a>
+      <a href="products.html"><i class="fas fa-box" style="margin-right:8px;"></i> Products</a>
+      <div class="menu-divider"></div>
+      <div id="authMenuLinks" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+         <a href="login.html"><i class="fas fa-sign-in-alt" style="margin-right:8px;"></i> Login / Sign Up</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">MARKET VISION</span>
+      <h1>Our Products</h1>
+      <p>Browse our available products.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search products...">
+        <div id="categories" class="chips"></div>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty" id="empty" hidden>No products found.</div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container footer-row">
+    <span>&copy; <span id="year"></span> Market Vision. All Rights Reserved.</span>
+  </div>
+</footer>
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/products.js"></script>
+</body>
+</html>
