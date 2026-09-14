@@ -1,7 +1,7 @@
 import { db } from "./config.js";
 import { requireAdminAuth } from "./auth.js";
 import { esc, DEFAULT_CATEGORIES } from "./app.js"; // <--- Import Default Categories
-import { collection, getDocs, addDoc, deleteDoc, doc, serverTimestamp, query, orderBy, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { collection, getDocs, addDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const WORKER_BASE_URL = "https://market-vision.dev-kumrekrishna.workers.dev"; 
 
@@ -34,18 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const search = document.getElementById("dashSearch");
   
   let allProducts = [];
-  const settingsDocRef = doc(db, "settings", "general");
 
-  async function loadSettings() {
-    try {
-        const snap = await getDoc(settingsDocRef);
-        if (snap.exists()) {
-          const data = snap.data();
-          document.getElementById("sitePhone").value = data.phone || "";
-          document.getElementById("siteInsta").value = data.instagram || "";
-        }
-    } catch(e) {}
-  }
 
   async function loadProducts() {
     try {
@@ -275,24 +264,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  document.getElementById("settingsForm")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const status = document.getElementById("settingsStatus");
-    status.textContent = "Saving...";
-    try {
-      await setDoc(settingsDocRef, {
-        phone: document.getElementById("sitePhone").value.trim(),
-        instagram: document.getElementById("siteInsta").value.trim()
-      }, { merge: true });
-      status.textContent = "Settings updated successfully!";
-      setTimeout(() => status.textContent = "", 3000);
-    } catch (err) {
-      status.textContent = "Error saving settings.";
-    }
-  });
 
   search?.addEventListener("input", render);
   
-  loadSettings();
   loadProducts();
 });
