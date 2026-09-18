@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function renderFullPageProduct(p) {
-    // FIX: Encode string correctly for HTML attribute
     const productDataStr = encodeURIComponent(JSON.stringify(p)).replace(/'/g, "%27");
     
     // IMAGE GALLERY LOGIC
@@ -70,7 +69,6 @@ function renderFullPageProduct(p) {
         mediaHtml = `<div style="width:100%; height:400px; background:#fff; display:grid; place-items:center; color:#1565c0; font-weight:bold; font-size:24px; border-radius:8px; border:1px solid #e7edf5;">MV</div>`;
     }
 
-    // SPECIFIC DETAILS LOGIC
     let detailsHtml = "";
     if (p.specificDetails && p.specificDetails.length > 0) {
         detailsHtml = `<div style="margin: 20px 0; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e7edf5;">
@@ -103,7 +101,6 @@ function renderFullPageProduct(p) {
                     <button class="btn primary" style="flex:1; font-size:16px;" onclick="buyNow('${productDataStr}', event)">
                         <i class="fab fa-whatsapp" style="margin-right:8px;"></i> Buy Now
                     </button>
-                    <!-- UPDATED ADD TO CART -->
                     <button class="btn secondary" style="flex:1; font-size:16px;" onclick="addToCart('${productDataStr}', event)">
                         <i class="fas fa-shopping-cart" style="margin-right:8px;"></i> Add to Cart
                     </button>
@@ -113,12 +110,14 @@ function renderFullPageProduct(p) {
 
         <div style="margin-bottom: 40px;">
             <h2 style="font-size:22px; color:#12203a; margin-bottom: 20px; border-bottom: 2px solid #e7edf5; padding-bottom:10px;">Similar Products</h2>
-            <div class="product-grid" id="similarProductsList" style="margin-bottom: 40px;">
+            <!-- Updated class to product-slider -->
+            <div class="product-slider" id="similarProductsList" style="margin-bottom: 40px;">
                 <p class="muted">Loading similar products...</p>
             </div>
             
             <h2 style="font-size:22px; color:#12203a; margin-bottom: 20px; border-bottom: 2px solid #e7edf5; padding-bottom:10px;">More to Explore</h2>
-            <div class="product-grid" id="otherProductsList">
+            <!-- Updated class to product-slider -->
+            <div class="product-slider" id="otherProductsList">
                 <p class="muted">Loading more products...</p>
             </div>
         </div>
@@ -170,8 +169,9 @@ async function loadSuggestedProducts(category, currentId) {
             }
         });
         
-        similarProducts = similarProducts.slice(0, 4);
-        otherProducts = otherProducts.sort(() => 0.5 - Math.random()).slice(0, 4);
+        // 8 cards in the slider looks better for horizontal scrolling
+        similarProducts = similarProducts.slice(0, 8);
+        otherProducts = otherProducts.sort(() => 0.5 - Math.random()).slice(0, 8);
 
         if (similarProducts.length === 0) {
             similarContainer.innerHTML = '<p class="muted">No similar products available.</p>';

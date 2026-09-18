@@ -388,6 +388,52 @@ button, input, textarea, select { font: inherit; }
   font-size: 13px;
 }
 
+/* Product Slider for Details Page */
+.product-slider {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+
+.product-slider .product-card {
+    /* Yeh property card ko stretch hone se rokegi aur exact width degi */
+    flex: 0 0 260px !important; 
+    width: 260px !important;
+    max-width: 260px !important;
+    scroll-snap-align: start;
+    height: auto;
+}
+
+/* Scrollbar styling for slider */
+.product-slider::-webkit-scrollbar {
+    height: 6px;
+}
+.product-slider::-webkit-scrollbar-track {
+    background: #f0f4f8;
+    border-radius: 10px;
+}
+.product-slider::-webkit-scrollbar-thumb {
+    background: #cbd9e9;
+    border-radius: 10px;
+}
+.product-slider::-webkit-scrollbar-thumb:hover {
+    background: #1565c0;
+}
+
+/* Mobile Devices Adjustment */
+@media(max-width: 600px) {
+    .product-slider .product-card {
+        flex: 0 0 220px !important;
+        width: 220px !important;
+        max-width: 220px !important;
+    }
+}
+
 
 /* =====================================
    RESPONSIVE
@@ -1301,4 +1347,18 @@ button, input, textarea, select { font: inherit; }
     padding: 10px 12px;
   }
 
+}
+
+/* Fix for Wishlist Grid inside Profile Wrapper */
+.profile-wrapper .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* Mobile responsive adjustment inside profile */
+@media (max-width: 600px) {
+    .profile-wrapper .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+    }
 }

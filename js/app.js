@@ -229,8 +229,9 @@ window.shareProduct = function(productName, event) {
 }
 
 export function productCard(p, isWished = false) {
-  const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
-  const reviews = Math.floor(Math.random() * 150) + 5;
+  // Real database rating aur review count setup
+  const rating = p.rating ? Number(p.rating).toFixed(1) : "0.0";
+  const reviewsCount = p.reviewCount || 0;
   
   // FIX: Properly encode product string to prevent single quote crashes
   const productDataStr = encodeURIComponent(JSON.stringify(p)).replace(/'/g, "%27");
@@ -256,7 +257,7 @@ export function productCard(p, isWished = false) {
         <span class="category">${esc(p.category || "General")}</span>
         <h3 class="product-name">${esc(p.name)}</h3>
         <div class="rating-snippet">
-            ${rating} <i class="fas fa-star"></i> <span>(${reviews})</span>
+            ${rating} <i class="fas fa-star"></i> <span>(${reviewsCount})</span>
         </div>
         <p>${esc(p.description || "")}</p>
         <div class="price">₹${Number(p.price || 0).toLocaleString("en-IN")}</div>
@@ -402,12 +403,59 @@ async function initApp() {
     }
 
     const featured = document.getElementById("featuredProducts");
+    const paginationContainer = document.getElementById("featuredPagination");
+
     if (featured) {
       featured.innerHTML = `<p class="muted">Loading products...</p>`;
-      const products = await getProducts(4);
-      featured.innerHTML = products.length 
-         ? products.map(p => productCard(p, userWishlist.includes(p.id))).join("") 
-         : `<p class="muted">No products available yet.</p>`;
+      
+      // Pagination logic - limit hata diya gaya hai
+      const allFeaturedProducts = await getProducts();
+      
+      const ITEMS_PER_PAGE = 12;
+      let currentPage = 1;
+
+      function renderFeaturedPage(page) {
+        currentPage = page;
+        const startIndex = (page - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        const pageItems = allFeaturedProducts.slice(startIndex, endIndex);
+
+        featured.innerHTML = pageItems.length 
+           ? pageItems.map(p => productCard(p, userWishlist.includes(p.id))).join("") 
+           : `<p class="muted">No products available yet.</p>`;
+           
+        renderPaginationControls();
+      }
+
+      function renderPaginationControls() {
+        if (!paginationContainer) return;
+        const totalPages = Math.ceil(allFeaturedProducts.length / ITEMS_PER_PAGE);
+
+        if (totalPages <= 1) {
+          paginationContainer.innerHTML = "";
+          return;
+        }
+
+        let tabsHtml = "";
+        for (let i = 1; i <= totalPages; i++) {
+          tabsHtml += `
+            <button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">
+              ${i}
+            </button>
+          `;
+        }
+        paginationContainer.innerHTML = tabsHtml;
+
+        paginationContainer.querySelectorAll(".page-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const selectedPage = Number(btn.dataset.page);
+            renderFeaturedPage(selectedPage);
+            document.getElementById("featured").scrollIntoView({ behavior: "smooth" });
+          });
+        });
+      }
+
+      renderFeaturedPage(1);
     }
   });
 }
