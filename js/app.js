@@ -229,11 +229,9 @@ window.shareProduct = function(productName, event) {
 }
 
 export function productCard(p, isWished = false) {
-  // Real database rating aur review count setup
   const rating = p.rating ? Number(p.rating).toFixed(1) : "0.0";
   const reviewsCount = p.reviewCount || 0;
   
-  // FIX: Properly encode product string to prevent single quote crashes
   const productDataStr = encodeURIComponent(JSON.stringify(p)).replace(/'/g, "%27");
   
   const heartClass = isWished ? "active-heart" : "";
@@ -383,8 +381,9 @@ async function initApp() {
 
       if (authMenuLinks) {
         let linksHtml = "";
-        if (role === "admin") {
-           linksHtml += `<a href="dashboard.html"><i class="fas fa-chart-line" style="margin-right:8px;"></i> Admin Dashboard</a>`;
+        if (role === "admin" || role === "editor") {
+           const dashboardLabel = role === "admin" ? "Admin Dashboard" : "Editor Dashboard";
+           linksHtml += `<a href="dashboard.html"><i class="fas fa-chart-line" style="margin-right:8px;"></i> ${dashboardLabel}</a>`;
         }
         linksHtml += `
           <a href="profile.html"><i class="fas fa-user-circle" style="margin-right:8px;"></i> My Profile</a>
@@ -408,7 +407,6 @@ async function initApp() {
     if (featured) {
       featured.innerHTML = `<p class="muted">Loading products...</p>`;
       
-      // Pagination logic - limit hata diya gaya hai
       const allFeaturedProducts = await getProducts();
       
       const ITEMS_PER_PAGE = 12;

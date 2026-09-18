@@ -9,7 +9,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-// Sirf Admins ko Dashboard access dene ka logic
+// Admins aur Editors ko Dashboard access dene ka logic
 export function requireAdminAuth() {
   onAuthStateChanged(auth, async user => {
     if (!user) {
@@ -17,9 +17,11 @@ export function requireAdminAuth() {
       return;
     }
     const userDoc = await getDoc(doc(db, "users", user.uid));
-    if (!userDoc.exists() || userDoc.data().role !== "admin") {
-      alert("Access Denied: Admins only.");
-      window.location.href = "index.html"; // Agar customer dashboard kholne ki koshish kare
+    const role = userDoc.exists() ? userDoc.data().role : null;
+    
+    if (role !== "admin" && role !== "editor") {
+      alert("Access Denied: Admins & Editors only.");
+      window.location.href = "index.html"; 
     }
   });
 }
@@ -104,13 +106,13 @@ document.addEventListener("DOMContentLoaded", () => {
             email: email,
             role: "customer"
           });
-          window.location.href = "profile.html"; // Signup ke baad profile bhejein
+          window.location.href = "profile.html"; 
         } else {
           const userCredential = await signInWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
           const userDoc = await getDoc(doc(db, "users", user.uid));
           
-          if (userDoc.exists() && userDoc.data().role === "admin") {
+          if (userDoc.exists() && ["admin", "editor"].includes(userDoc.data().role)) {
             window.location.href = "dashboard.html";
           } else {
             window.location.href = "index.html"; 
@@ -140,13 +142,13 @@ document.addEventListener("DOMContentLoaded", () => {
             name: user.displayName || "",
             email: user.email,
             phone: user.phoneNumber || "",
-            pfp: user.photoURL || "", // Google PFP default set kardo
+            pfp: user.photoURL || "", 
             role: "customer"
           });
           window.location.href = "index.html";
         } else {
           // Purana user
-          if (userDoc.data().role === "admin") {
+          if (["admin", "editor"].includes(userDoc.data().role)) {
             window.location.href = "dashboard.html";
           } else {
             window.location.href = "index.html";

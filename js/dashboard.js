@@ -1,7 +1,8 @@
-import { db } from "./config.js";
+import { db, auth } from "./config.js";
 import { requireAdminAuth } from "./auth.js";
-import { esc, DEFAULT_CATEGORIES } from "./app.js"; // <--- Import Default Categories
-import { collection, getDocs, addDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { esc, DEFAULT_CATEGORIES } from "./app.js"; 
+import { collection, getDocs, addDoc, deleteDoc, doc, getDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
 const WORKER_BASE_URL = "https://market-vision.dev-kumrekrishna.workers.dev"; 
 
@@ -35,6 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
   
   let allProducts = [];
 
+  // Editor check & UI restrictions
+  onAuthStateChanged(auth, async user => {
+    if (user) {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists() && userDoc.data().role === "editor") {
+        // Agar aage chal kar Orders ka koi tab aata hai, to usko display none kar de:
+        const ordersTab = document.getElementById("ordersTab");
+        if (ordersTab) ordersTab.style.display = "none";
+      }
+    }
+  });
 
   async function loadProducts() {
     try {
